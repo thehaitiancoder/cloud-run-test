@@ -1,0 +1,39 @@
+steps:
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["build", "-t", "gcr.io/$patnem-backend/helloworld:$SHORT_SHA", "."]
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "tag",
+        "gcr.io/$patnem-backend/helloworld:$SHORT_SHA",
+        "gcr.io/$patnem-backend/helloworld:latest",
+      ]
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "tag",
+        "gcr.io/$patnem-backend/helloworld:$SHORT_SHA",
+        "gcr.io/$patnem-backend/helloworld:$BRANCH_NAME",
+      ]
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/$patnem-backend/helloworld:$SHORT_SHA"]
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/$patnem-backend/helloworld:latest"]
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/$patnem-backend/helloworld:$BRANCH_NAME"]
+  - name: "gcr.io/cloud-builders/gcloud"
+    args:
+      [
+        "beta",
+        "run",
+        "deploy",
+        "--region",
+        "us-central1",
+        "--image",
+        "gcr.io/$patnem-backend/helloworld",
+        "--platform",
+        "managed",
+        "helloworld",
+      ]
+images:
+  - "gcr.io/$patnem-backend/helloworld"

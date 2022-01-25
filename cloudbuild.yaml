@@ -1,26 +1,26 @@
 steps:
   - name: "gcr.io/cloud-builders/docker"
-    args: ["build", "-t", "gcr.io/$patnem-backend/helloworld:$SHORT_SHA", "."]
+    args: ["build", "-t", "gcr.io/$PROJECT_ID/helloworld:$SHORT_SHA", "."]
   - name: "gcr.io/cloud-builders/docker"
     args:
       [
         "tag",
-        "gcr.io/$patnem-backend/helloworld:$SHORT_SHA",
-        "gcr.io/$patnem-backend/helloworld:latest",
+        "gcr.io/$PROJECT_ID/helloworld:$SHORT_SHA",
+        "gcr.io/$PROJECT_ID/helloworld:latest",
       ]
   - name: "gcr.io/cloud-builders/docker"
     args:
       [
         "tag",
-        "gcr.io/$patnem-backend/helloworld:$SHORT_SHA",
-        "gcr.io/$patnem-backend/helloworld:$BRANCH_NAME",
+        "gcr.io/$PROJECT_ID/helloworld:$SHORT_SHA",
+        "gcr.io/$PROJECT_ID/helloworld:$BRANCH_NAME",
       ]
   - name: "gcr.io/cloud-builders/docker"
-    args: ["push", "gcr.io/$patnem-backend/helloworld:$SHORT_SHA"]
+    args: ["push", "gcr.io/$PROJECT_ID/helloworld:$SHORT_SHA"]
   - name: "gcr.io/cloud-builders/docker"
-    args: ["push", "gcr.io/$patnem-backend/helloworld:latest"]
+    args: ["push", "gcr.io/$PROJECT_ID/helloworld:latest"]
   - name: "gcr.io/cloud-builders/docker"
-    args: ["push", "gcr.io/$patnem-backend/helloworld:$BRANCH_NAME"]
+    args: ["push", "gcr.io/$PROJECT_ID/helloworld:$BRANCH_NAME"]
   - name: "gcr.io/cloud-builders/gcloud"
     args:
       [
@@ -30,10 +30,10 @@ steps:
         "--region",
         "us-central1",
         "--image",
-        "gcr.io/$patnem-backend/helloworld",
+        "gcr.io/$PROJECT_ID/helloworld",
         "--platform",
         "managed",
         "helloworld",
       ]
 images:
-  - "gcr.io/$patnem-backend/helloworld"
+  - "gcr.io/$PROJECT_ID/helloworld"

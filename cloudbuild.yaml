@@ -28,12 +28,13 @@ steps:
         "run",
         "deploy",
         "--region",
-        "us-central1",
+        "us-east1",
         "--image",
         "gcr.io/$PROJECT_ID/helloworld",
         "--platform",
         "managed",
         "helloworld",
+        "--allow-unauthenticated",
       ]
 images:
   - "gcr.io/$PROJECT_ID/helloworld"

@@ -18,6 +18,12 @@ app.get("/loca", (req, res) => {
   );
 });
 
+app.get("/locatoo", (req, res) => {
+  res.send(
+    `This chick is loca and her job title is ${process.env.PRINCIPAL_MODEL_TITLE2}, yet she is loved.`
+  );
+});
+
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
   console.log("Hello world listening on port", port);
